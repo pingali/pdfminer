@@ -105,8 +105,11 @@ class PDFLayoutAnalyzer(PDFTextDevice):
 
     def render_char(self, matrix, font, fontsize, scaling, rise, cid):
         try:
-            text = font.to_unichr(cid)
-            assert isinstance(text, unicode), text
+            if self.laparams.cids_only: 
+                text = self.handle_undefined_char(font, cid)
+            else: 
+                text = font.to_unichr(cid)
+                assert isinstance(text, unicode), text
         except PDFUnicodeNotDefined:
             text = self.handle_undefined_char(font, cid)
         textwidth = font.char_width(cid)

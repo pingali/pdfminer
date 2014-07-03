@@ -39,7 +39,8 @@ class LAParams(object):
                  word_margin=0.1,
                  boxes_flow=0.5,
                  detect_vertical=False,
-                 all_texts=False):
+                 all_texts=False,
+                 cids_only=False):
         self.line_overlap = line_overlap
         self.char_margin = char_margin
         self.line_margin = line_margin
@@ -47,6 +48,7 @@ class LAParams(object):
         self.boxes_flow = boxes_flow
         self.detect_vertical = detect_vertical
         self.all_texts = all_texts
+        self.cids_only = cids_only
         return
 
     def __repr__(self):

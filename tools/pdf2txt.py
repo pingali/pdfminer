@@ -17,11 +17,11 @@ def main(argv):
         print ('usage: %s [-d] [-p pagenos] [-m maxpages] [-P password] [-o output]'
                ' [-C] [-n] [-A] [-V] [-M char_margin] [-L line_margin] [-W word_margin]'
                ' [-F boxes_flow] [-Y layout_mode] [-O output_dir] [-R rotation] [-S]'
-               ' [-t text|html|xml|tag] [-c codec] [-s scale]'
+               ' [-t text|html|xml|tag] [-c codec] [-s scale] [-r] '
                ' file ...' % argv[0])
         return 100
     try:
-        (opts, args) = getopt.getopt(argv[1:], 'dp:m:P:o:CnAVM:L:W:F:Y:O:R:St:c:s:')
+        (opts, args) = getopt.getopt(argv[1:], 'dp:m:P:o:CnAVM:L:W:F:Y:O:R:St:c:s:r')
     except getopt.GetoptError:
         return usage()
     if not args: return usage()
@@ -43,6 +43,7 @@ def main(argv):
     scale = 1
     caching = True
     showpageno = True
+
     laparams = LAParams()
     for (k, v) in opts:
         if k == '-d': debug += 1
@@ -65,6 +66,7 @@ def main(argv):
         elif k == '-t': outtype = v
         elif k == '-c': codec = v
         elif k == '-s': scale = float(v)
+        elif k == '-r': laparams.cids_only = True 
     #
     PDFDocument.debug = debug
     PDFParser.debug = debug
